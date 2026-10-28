@@ -1,0 +1,20 @@
+environments = {
+  prod = {
+    host_project_id    = "my-org-prod-net-host"
+    service_project_id = "my-org-prod-app"
+    region             = "northamerica-northeast1"
+    subnet_cidr        = "10.80.0.0/20"
+  }
+  dev = {
+    host_project_id    = "my-org-dev-net-host"
+    service_project_id = "my-org-dev-app"
+    region             = "northamerica-northeast1"
+    subnet_cidr        = "10.90.0.0/20"
+  }
+}
+
+# Grant ONLY approved workload identities; none are granted by default.
+subnet_users = {
+  prod = []
+  dev  = []
+}

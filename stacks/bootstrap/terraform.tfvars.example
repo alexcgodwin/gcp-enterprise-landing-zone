@@ -1,0 +1,3 @@
+bootstrap_project_id = "my-existing-bootstrap-project"
+state_bucket_name    = "my-org-gcp-terraform-state-unique"
+bucket_location      = "NORTHAMERICA-NORTHEAST1"

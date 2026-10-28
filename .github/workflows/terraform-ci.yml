@@ -1,0 +1,54 @@
+name: Terraform CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: terraform-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  formatting:
+    name: Terraform format and repository hygiene
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.15.8
+      - name: Terraform formatting
+        run: terraform fmt -check -recursive -diff
+      - name: Reject tracked secrets and Terraform state
+        run: python3 scripts/check_repository.py
+
+  validate:
+    name: Validate ${{ matrix.stack }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        stack: [bootstrap, foundation, network, identity]
+    defaults:
+      run:
+        working-directory: stacks/${{ matrix.stack }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.15.8
+      - name: Init without remote backend or credentials
+        run: terraform init -backend=false -input=false -no-color
+      - name: Validate Terraform configuration
+        run: terraform validate -no-color
+
+# Intentionally no apply job, cloud credentials, secrets, or project writes.

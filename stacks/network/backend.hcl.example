@@ -1,0 +1,3 @@
+# Pass as -backend-config=backend.hcl (untracked copy). Do not commit the actual file.
+bucket = "my-org-gcp-terraform-state-unique"
+prefix = "landing-zone/network"

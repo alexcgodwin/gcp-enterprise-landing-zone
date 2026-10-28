@@ -1,0 +1,4 @@
+# Copy to backend.tf only AFTER creating the bucket with local state.
+terraform {
+  backend "gcs" {}
+}

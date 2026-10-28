@@ -1,0 +1,14 @@
+organization_id   = "123456789012"
+billing_account   = "012345-ABCDEF-678901"
+audit_bucket_name = "my-org-security-audit-archive-unique"
+
+project_ids = {
+  prod_host = "my-org-prod-net-host"
+  dev_host  = "my-org-dev-net-host"
+  prod_app  = "my-org-prod-app"
+  dev_app   = "my-org-dev-app"
+  audit     = "my-org-security-audit"
+}
+
+# This changes policies for every descendant in the GCP organization.
+enable_organization_policies = false

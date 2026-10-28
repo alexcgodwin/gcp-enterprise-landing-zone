@@ -1,0 +1,5 @@
+identity_project_id = "my-existing-bootstrap-project"
+# Immutable IDs can be retrieved with GitHub API/gh CLI.
+github_owner_id      = "320822930"
+github_repository_id = "1436440713"
+github_repository    = "alexcgodwin/gcp-enterprise-landing-zone"
